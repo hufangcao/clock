@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    .wrap{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 300px;
+      height: 300px;
+      border: solid 1px;
+      border-radius: 50%;
+    }
+    ul{
+      list-style: none;
+    }
+    ul>li{
+      width: 4px;
+      height: 10px;
+      background-color: black;
+      position: absolute;
+      left: 148px;
+      top: 0;
+     /* -webkit-transform-origin: 100px;
+      -moz-transform-origin: 100px;
+      -ms-transform-origin: 100px;
+      -o-transform-origin: 100px;*/
+      transform-origin: 50% 150px;
+    }
+
+    .wrap>.hours{
+      width: 6px;
+      height: 50px;
+      background-color: black;
+      position:absolute;
+      top:100px;
+      left:147px;
+      transform-origin: 3px bottom;
+
+    }
+    .wrap>.min{
+      width: 4px;
+      height: 60px;
+      background-color: silver;
+      position: absolute;
+      left: 148px;
+      top:90px;
+      transform-origin: 2px bottom;
+    }
+    .wrap>.sec{
+      width: 2px;
+      height: 90px;
+      background-color: hotpink;
+      position: absolute;
+      left: 149px;
+      top: 60px;
+      transform-origin: 1px bottom;
+    }
+    .wrap>.cold{
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background-color: #009F95;
+      position: absolute;
+      top: 137px;
+      left: 137px;
+
+    }
+    .wrap>ul>li:nth-of-type(5n+1){
+      height: 18px;
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="wrap">
+
+  <ul>
+
+  </ul>
+  <div class="hours"></div>
+  <div class="min"></div>
+  <div class="sec"></div>
+  <div class="cold"></div>
+</div>
+<script>
+window.onload=function () {
+  var ul=document.querySelector(".wrap>ul");
+  var styleNode=document.createElement("style");
+  var hours=document.querySelector(".hours");
+  var min=document.querySelector(".min");
+  var sec=document.querySelector(".sec");
+    var text="";
+  var textcss="";
+    for(var i=0;i<60;i++){
+      text+="<li></li>"
+      textcss+=".wrap>ul>li:nth-of-type("+(i)+"){transform:rotate("+(i*6)+"deg)}"
+    }
+
+    ul.innerHTML=text;
+    styleNode.innerHTML=textcss;
+    document.head.appendChild(styleNode);
+    move();
+    setInterval(move,1000);
+    function move() {
+      var date=new Date();
+      var s=date.getSeconds();
+      var m=date.getMinutes()+s/60;
+      var h=date.getHours()+m/60;
+      hours.style.transform="rotate("+(h*30)+"deg)";
+      min.style.transform="rotate("+(m*6)+"deg)";
+      sec.style.transform="rotate("+(s*6)+"deg)"
+
+
+
+
+
+
+    }
+    }
+
+
+
+</script>
+</body>
+</html>
